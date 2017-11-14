@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "c0lor": "^0.1.0",
+    "github": "^12.0.1",
+    "huejay": "^1.7.1"
+  },
+  "name": "light_house",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT"
+}

@@ -2,6 +2,7 @@ const GitHub = require('github');
 const LightHouse = require('./light_house');
 
 const LIGHT_NAME = 'Jakes Desk Lamp';
+const GITHUB_POLL_INTERVAL = 30000;
 if (!process.env.LREPO) throw 'set LREPO to repo name'; 
 const GITHUB_TARGET = {
   owner: process.env.LOWNER || 'callrail',
@@ -24,12 +25,14 @@ github.authenticate({
 });
 
 updateLight();
-setInterval(updateLight, 10000)
+setInterval(updateLight, GITHUB_POLL_INTERVAL)
 
 process.on('SIGINT', () => {
   console.log(" - wait, turning off lamp...");
   light.turnOff()
-  light.save().then(() => process.exit());
+  light.save().then(() => process.exit()).catch((e) => {
+    console.log("ERROR TURNING OFF LAMP:", e); process.exit()
+  });
 });
 
 function updateLight() {

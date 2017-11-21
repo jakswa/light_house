@@ -41,6 +41,8 @@ module.exports = class LightHouse {
   }
 
   static getBridgeIP(force) { 
+    // discovery broke, hardcoding for now
+    return Promise.resolve('192.168.11.126');
     if (!this.discoverPromise || force) { 
       this.discoverPromise = Huejay.discover();
     }
